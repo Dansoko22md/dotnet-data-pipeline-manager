@@ -185,7 +185,7 @@ Set `DPM.UI` as startup project and press **F5**.
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Moussa Dansoko
 
 Built as a portfolio project demonstrating:
 - Desktop development with .NET + WPF
