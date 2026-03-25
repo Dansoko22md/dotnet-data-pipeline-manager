@@ -1,0 +1,166 @@
+﻿<Page x:Class="DPM.UI.Views.ImportDataView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="#1E1E2E">
+    <ScrollViewer>
+        <StackPanel Margin="30">
+            <TextBlock Text="📁 Import Data Source" Foreground="White"
+                       FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+            <!-- Source Type -->
+            <Border Background="#313244" CornerRadius="10" Padding="20" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="Source Type" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,8"/>
+                    <ComboBox x:Name="SourceTypeCombo"
+                              Background="#45475A" Foreground="White"
+                              BorderThickness="0" Padding="10,8"
+                              SelectionChanged="SourceTypeCombo_SelectionChanged">
+                        <ComboBox.Resources>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#45475A"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </ComboBox.Resources>
+                        <ComboBoxItem Content="CSV" Tag="CSV"/>
+                        <ComboBoxItem Content="TXT" Tag="TXT"/>
+                        <ComboBoxItem Content="Excel (.xlsx)" Tag="Excel"/>
+                        <ComboBoxItem Content="PostgreSQL" Tag="PostgreSQL"/>
+                        <ComboBoxItem Content="MySQL" Tag="MySQL"/>
+                        <ComboBoxItem Content="Oracle" Tag="Oracle"/>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <!-- File Source Panel -->
+            <Border x:Name="FilePanel" Background="#313244" CornerRadius="10"
+                    Padding="20" Margin="0,0,0,15" Visibility="Visible">
+                <StackPanel>
+                    <TextBlock Text="File Path" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="FilePathBox"
+                                 Background="#45475A" Foreground="White"
+                                 BorderThickness="0" Padding="10,8"
+                                 IsReadOnly="True"/>
+                        <Button Grid.Column="1" Content="Browse"
+                                Background="#89B4FA" Foreground="#1E1E2E"
+                                FontWeight="Bold" Padding="15,8"
+                                BorderThickness="0" Cursor="Hand"
+                                Margin="10,0,0,0"
+                                Click="BrowseFile_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Database Panel -->
+            <Border x:Name="DatabasePanel" Background="#313244" CornerRadius="10"
+                    Padding="20" Margin="0,0,0,15" Visibility="Collapsed">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Host" Foreground="#CDD6F4"
+                                       FontSize="13" Margin="0,0,0,5"/>
+                            <TextBox x:Name="HostBox" Background="#45475A"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="10,8" Margin="0,0,10,10"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Port" Foreground="#CDD6F4"
+                                       FontSize="13" Margin="0,0,0,5"/>
+                            <TextBox x:Name="PortBox" Background="#45475A"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="10,8" Margin="0,0,0,10"/>
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="Database Name" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,5"/>
+                    <TextBox x:Name="DatabaseNameBox" Background="#45475A"
+                             Foreground="White" BorderThickness="0"
+                             Padding="10,8" Margin="0,0,0,10"/>
+                    <TextBlock Text="Username" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,5"/>
+                    <TextBox x:Name="UsernameBox" Background="#45475A"
+                             Foreground="White" BorderThickness="0"
+                             Padding="10,8" Margin="0,0,0,10"/>
+                    <TextBlock Text="Password" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,5"/>
+                    <PasswordBox x:Name="PasswordBox" Background="#45475A"
+                                 Foreground="White" BorderThickness="0"
+                                 Padding="10,8" Margin="0,0,0,10"/>
+                    <TextBlock Text="SQL Query" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,5"/>
+                    <TextBox x:Name="QueryBox" Background="#45475A"
+                             Foreground="White" BorderThickness="0"
+                             Padding="10,8" Height="80"
+                             TextWrapping="Wrap" AcceptsReturn="True"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Pipeline Selection -->
+            <Border Background="#313244" CornerRadius="10"
+                    Padding="20" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="Attach to Pipeline" Foreground="#CDD6F4"
+                               FontSize="13" Margin="0,0,0,8"/>
+                    <ComboBox x:Name="PipelineCombo"
+                              Background="#45475A" Foreground="White"
+                              BorderThickness="0" Padding="10,8"
+                              DisplayMemberPath="Name">
+                        <ComboBox.Resources>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#45475A"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </ComboBox.Resources>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <Button Content="👁 Preview (50 rows)"
+                        Background="#CBA6F7" Foreground="#1E1E2E"
+                        FontWeight="Bold" Padding="15,8"
+                        BorderThickness="0" Cursor="Hand"
+                        Margin="0,0,10,0"
+                        Click="Preview_Click"/>
+                <Button Content="💾 Save Data Source"
+                        Background="#A6E3A1" Foreground="#1E1E2E"
+                        FontWeight="Bold" Padding="15,8"
+                        BorderThickness="0" Cursor="Hand"
+                        Click="SaveDataSource_Click"/>
+            </StackPanel>
+
+            <!-- Preview -->
+            <TextBlock x:Name="PreviewLabel" Text="" Foreground="White"
+                       FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <DataGrid x:Name="PreviewGrid"
+                      AutoGenerateColumns="True"
+                      Background="#313244" Foreground="White"
+                      BorderThickness="0" RowBackground="#313244"
+                      AlternatingRowBackground="#45475A"
+                      GridLinesVisibility="None" IsReadOnly="True"
+                      MaxHeight="400">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#181825"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Padding" Value="10,8"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
